@@ -1,0 +1,63 @@
+name: Build Windows installer
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-2025
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Verify WiX Toolset
+        shell: pwsh
+        run: |
+          $wixRoot = $env:WIX
+          $wixBin = if ($wixRoot) { Join-Path $wixRoot 'bin' }
+          if (-not $wixBin -or -not (Test-Path (Join-Path $wixBin 'candle.exe')) -or
+              -not (Test-Path (Join-Path $wixBin 'light.exe'))) {
+            throw 'WiX Toolset is required by jpackage to create a Windows EXE installer.'
+          }
+          Add-Content -Path $env:GITHUB_PATH -Value $wixBin
+
+      - name: Build installer
+        shell: pwsh
+        run: .\tools\build-app-image.ps1 -Installer
+
+      - name: Prepare release file
+        shell: pwsh
+        run: |
+          $installer = Get-ChildItem -Path 'target/package-*' -Filter 'CraftBiker-1.0.exe' -File -Recurse |
+            Sort-Object LastWriteTime -Descending |
+            Select-Object -First 1
+          if (-not $installer) { throw 'The EXE installer was not created.' }
+          New-Item -ItemType Directory -Path dist -Force | Out-Null
+          Copy-Item -LiteralPath $installer.FullName -Destination 'dist/BikeFlowClient-Setup.exe'
+
+      - name: Upload installer artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: BikeFlowClient-Setup
+          path: dist/BikeFlowClient-Setup.exe
+          if-no-files-found: error
+
+      - name: Publish GitHub release
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$env:GITHUB_REF_NAME" 'dist/BikeFlowClient-Setup.exe' --title "BikeFlowClient $env:GITHUB_REF_NAME" --generate-notes

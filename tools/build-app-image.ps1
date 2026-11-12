@@ -1,3 +1,5 @@
+param([switch]$Installer)
+
 $ErrorActionPreference = 'Stop'
 $projectDirectory = Split-Path -Parent $PSScriptRoot
 Push-Location -LiteralPath $projectDirectory
@@ -48,15 +50,27 @@ try {
     }
     # A separate output folder makes repeated builds safe without deleting previous builds.
     $outputDirectory = Join-Path $projectDirectory ('target/package-' + (Get-Date -Format 'yyyyMMdd-HHmmss'))
-    & $jpackagePath '--type' 'app-image' '--name' 'CraftBiker' '--dest' $outputDirectory `
+    $packageType = if ($Installer) { 'exe' } else { 'app-image' }
+    $installerOptions = @()
+    if ($Installer) {
+        $installerOptions = @('--win-menu', '--win-shortcut', '--win-per-user-install')
+    }
+    & $jpackagePath '--type' $packageType '--name' 'CraftBiker' '--dest' $outputDirectory `
         '--input' $inputDirectory '--main-jar' 'craft_biker-1.0-SNAPSHOT.jar' '--main-class' 'org.bike.Main' `
         '--module-path' ($modules -join ';') `
         '--add-modules' 'java.se,javafx.controls,javafx.fxml,jdk.crypto.ec,jdk.unsupported' `
         '--java-options' '--add-modules=javafx.controls,javafx.fxml' `
         '--icon' (Join-Path $projectDirectory 'tools/assets/craft-biker-app-icon.ico') `
-        '--app-version' '1.0' '--vendor' 'Craft Bike'
+        '--app-version' '1.0' '--vendor' 'Craft Bike' @installerOptions
     if ($LASTEXITCODE -ne 0) { throw 'Не удалось создать приложение с Java runtime.' }
-    Write-Output (Join-Path $outputDirectory 'CraftBiker/CraftBiker.exe')
+    if ($Installer) {
+        $installerFile = Get-ChildItem -LiteralPath $outputDirectory -Filter '*.exe' -File |
+            Select-Object -First 1
+        if (-not $installerFile) { throw 'Не удалось найти созданный EXE-установщик.' }
+        Write-Output $installerFile.FullName
+    } else {
+        Write-Output (Join-Path $outputDirectory 'CraftBiker/CraftBiker.exe')
+    }
 } finally {
     Pop-Location
 }
