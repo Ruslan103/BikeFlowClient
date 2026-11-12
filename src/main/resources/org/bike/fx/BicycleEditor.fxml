@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<VBox stylesheets="@theme.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.bike.fx.client.BicycleEditorController" fx:id="root" prefWidth="820" prefHeight="420" spacing="14" styleClass="dialog">
+  <Label text="Карточка велосипеда" wrapText="true" styleClass="title" />
+  <Label text="Марка" wrapText="true" />
+  <TextField fx:id="brand" promptText="" />
+  <Label text="Комментарий" wrapText="true" />
+  <TextArea fx:id="comment" wrapText="true" prefRowCount="6" VBox.vgrow="ALWAYS" />
+  <HBox spacing="8" alignment="CENTER_LEFT">
+    <Button text="Сохранить велосипед" onAction="#save" fx:id="saveButton">
+      <graphic>
+        <StackPane prefWidth="28" prefHeight="28" minWidth="28" minHeight="28" styleClass="icon-tile">
+          <SVGPath content="M 2 1 H 12 L 15 4 V 15 H 1 V 1 Z M 4 1 V 6 H 11 V 1 M 4 15 V 9 H 12 V 15" fill="TRANSPARENT" stroke="#606060" strokeWidth="1.4" />
+        </StackPane>
+      </graphic>
+    </Button>
+  </HBox>
+  <Label fx:id="status" wrapText="true" styleClass="status" />
+</VBox>
+

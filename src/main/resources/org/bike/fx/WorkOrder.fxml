@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+
+<BorderPane fx:id="root" prefHeight="820" prefWidth="1250" stylesheets="@theme.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.bike.fx.workorder.WorkOrderController">
+  <left>
+    <VBox maxWidth="200" minWidth="200" prefWidth="200" spacing="10" styleClass="toolbar">
+      <Label styleClass="toolbar-heading" text="ДЕЙСТВИЯ" />
+      <Button fx:id="newButton" disable="true" onAction="#create" text="Новый бланк">
+        <graphic>
+          <StackPane minHeight="28" minWidth="28" prefHeight="28" prefWidth="28" styleClass="icon-tile">
+            <SVGPath content="M 8 2 V 14 M 2 8 H 14" fill="TRANSPARENT" stroke="#606060" strokeWidth="1.4" />
+          </StackPane>
+        </graphic>
+      </Button>
+      <Button onAction="#open" text="Найти бланк">
+        <graphic>
+          <StackPane minHeight="28" minWidth="28" prefHeight="28" prefWidth="28" styleClass="icon-tile">
+          <SVGPath content="M 10.5 10.5 L 15 15 M 12 6.5 A 5.5 5.5 0 1 1 1 6.5 A 5.5 5.5 0 1 1 12 6.5 Z" fill="TRANSPARENT" stroke="#606060" strokeWidth="1.4" />
+          </StackPane>
+        </graphic>
+      </Button>
+      <Button fx:id="saveButton" onAction="#save" styleClass="primary" text="Сохранить бланк">
+        <graphic>
+          <StackPane minHeight="28" minWidth="28" prefHeight="28" prefWidth="28" styleClass="icon-tile">
+            <SVGPath content="M 2 1 H 12 L 15 4 V 15 H 1 V 1 Z M 4 1 V 6 H 11 V 1 M 4 15 V 9 H 12 V 15" fill="TRANSPARENT" stroke="#606060" strokeWidth="1.4" />
+          </StackPane>
+        </graphic>
+      </Button>
+      <Button onAction="#printAcceptance" text="Акт приёма">
+        <graphic>
+          <StackPane minHeight="28" minWidth="28" prefHeight="28" prefWidth="28" styleClass="icon-tile">
+            <SVGPath content="M 4 2 H 12 V 6 H 4 Z M 3 6 H 13 C 14.1 6 15 6.9 15 8 V 12 H 12 V 15 H 4 V 12 H 1 V 8 C 1 6.9 1.9 6 3 6 Z M 4 10 H 12 V 15 H 4 Z" fill="TRANSPARENT" stroke="#606060" strokeWidth="1.2" />
+          </StackPane>
+        </graphic>
+      </Button>
+      <Button onAction="#printIssue" text="Акт выдачи">
+        <graphic>
+          <StackPane minHeight="28" minWidth="28" prefHeight="28" prefWidth="28" styleClass="icon-tile">
+            <SVGPath content="M 4 2 H 12 V 6 H 4 Z M 3 6 H 13 C 14.1 6 15 6.9 15 8 V 12 H 12 V 15 H 4 V 12 H 1 V 8 C 1 6.9 1.9 6 3 6 Z M 4 10 H 12 V 15 H 4 Z" fill="TRANSPARENT" stroke="#606060" strokeWidth="1.2" />
+          </StackPane>
+        </graphic>
+      </Button>
+    </VBox>
+  </left>
+  <center>
+    <ScrollPane fitToHeight="true" fitToWidth="true" styleClass="page-scroll">
+      <content>
+        <VBox id="workOrderPage" minHeight="0" maxHeight="Infinity" spacing="8" styleClass="page">
+          <Label fx:id="mode" styleClass="title" text="Создание нового бланка" />
+          <HBox alignment="TOP_LEFT" spacing="16">
+            <VBox maxWidth="380" minWidth="0" prefWidth="380" spacing="10" styleClass="card">
+              <Label text="Клиент" wrapText="true">
+                        <styleClass>
+                           <String fx:value="heading" />
+                           <String fx:value="client-name" />
+                        </styleClass></Label>
+              <HBox alignment="CENTER_LEFT" spacing="8">
+                <TextField fx:id="query" onAction="#search" promptText="Телефон, ФИО или организация" HBox.hgrow="ALWAYS" />
+              </HBox>
+              <Label fx:id="clientName" styleClass="client-name" text="Клиент не выбран" wrapText="true" />
+              <Label fx:id="clientDetails" styleClass="muted" text="Найдите клиента по телефону, ФИО или организации" wrapText="true" />
+              <Label fx:id="snapshotStatus" styleClass="muted" text="Сохранённые данные бланка" wrapText="true" />
+              <HBox alignment="CENTER_LEFT" spacing="8">
+                <Button onAction="#createClient" text="Создать " />
+                <Button onAction="#openClient" text="Редактировать">
+                </Button>
+                <Button onAction="#refreshClient" text="Обновить">
+                </Button>
+              </HBox>
+              <HBox alignment="CENTER_LEFT" spacing="8" />
+              <Label styleClass="heading" text="Контакт для бланка" wrapText="true" />
+              <ComboBox fx:id="contact" maxWidth="Infinity" />
+            </VBox>
+
+<VBox minWidth="0" prefWidth="680" spacing="12" HBox.hgrow="ALWAYS">
+<VBox minWidth="0" spacing="10" styleClass="card">
+              <Label text="Оформление бланка" wrapText="true">
+                        <styleClass>
+                           <String fx:value="heading" />
+                           <String fx:value="client-name" />
+                        </styleClass></Label>
+              <HBox alignment="TOP_LEFT" spacing="16">
+                <VBox minWidth="0" prefWidth="310" spacing="10">
+              <HBox alignment="TOP_LEFT" spacing="8">
+                <VBox minWidth="0" spacing="4">
+                  <Label styleClass="heading" text="Номер" wrapText="true" />
+                  <TextField fx:id="number" prefColumnCount="5" prefWidth="90" />
+                </VBox>
+                <VBox minWidth="0" spacing="4">
+                  <Label styleClass="heading" text="Дата" wrapText="true" />
+                  <DatePicker fx:id="date" maxWidth="120" prefWidth="120" />
+                </VBox>
+                <VBox minWidth="0" spacing="4">
+                  <Label styleClass="heading" text="Время" wrapText="true" />
+                  <TextField fx:id="time" maxWidth="70" prefWidth="70" promptText="ЧЧ:мм" />
+                </VBox>
+              </HBox>
+                  <Button onAction="#generateNumber" text="Получить номер" />
+                </VBox>
+                <HBox minWidth="0" spacing="12" HBox.hgrow="ALWAYS">
+                  <VBox minWidth="0" prefWidth="180" spacing="6" HBox.hgrow="ALWAYS">
+                    <HBox alignment="CENTER_LEFT" spacing="4">
+                      <Label styleClass="heading" text="Заявленная неисправность" wrapText="true" HBox.hgrow="ALWAYS" />
+                      <Button onAction="#editIssue" accessibleText="Редактировать заявленную неисправность" minWidth="20" prefWidth="20" minHeight="20" prefHeight="20" style="-fx-padding: 1; -fx-background-color: transparent; -fx-border-color: transparent; -fx-cursor: hand;">
+                        <graphic><SVGPath content="M 3 17.25 L 3 21 L 6.75 21 L 17.81 9.94 L 14.06 6.19 Z M 20.71 7.04 L 16.97 3.29 C 16.58 2.9 15.95 2.9 15.56 3.29 L 13.73 5.12 L 18.88 10.27 L 20.71 8.44 C 21.1 8.05 21.1 7.42 20.71 7.04 Z" fill="#606060" scaleX="0.75" scaleY="0.75" /></graphic>
+                      </Button>
+                    </HBox>
+                    <TextArea fx:id="issue" minWidth="0" prefRowCount="3" prefWidth="180" wrapText="true" />
+                  </VBox>
+                  <VBox minWidth="0" prefWidth="180" spacing="6" HBox.hgrow="ALWAYS">
+                    <HBox alignment="CENTER_LEFT" spacing="4">
+                      <Label styleClass="heading" text="Комментарий к заказу" wrapText="true" HBox.hgrow="ALWAYS" />
+                      <Button onAction="#editClientComment" accessibleText="Редактировать комментарий к заказу" minWidth="20" prefWidth="20" minHeight="20" prefHeight="20" style="-fx-padding: 1; -fx-background-color: transparent; -fx-border-color: transparent; -fx-cursor: hand;">
+                        <graphic><SVGPath content="M 3 17.25 L 3 21 L 6.75 21 L 17.81 9.94 L 14.06 6.19 Z M 20.71 7.04 L 16.97 3.29 C 16.58 2.9 15.95 2.9 15.56 3.29 L 13.73 5.12 L 18.88 10.27 L 20.71 8.44 C 21.1 8.05 21.1 7.42 20.71 7.04 Z" fill="#606060" scaleX="0.75" scaleY="0.75" /></graphic>
+                      </Button>
+                    </HBox>
+                    <TextArea fx:id="clientComment" minWidth="0" prefRowCount="3" prefWidth="180" wrapText="true" />
+                  </VBox>
+                  <VBox minWidth="0" prefWidth="180" spacing="6" HBox.hgrow="ALWAYS">
+                    <HBox alignment="CENTER_LEFT" spacing="4">
+                      <Label styleClass="heading" text="Комментарий для себя" wrapText="true" HBox.hgrow="ALWAYS" />
+                      <Button onAction="#editInternalComment" accessibleText="Редактировать комментарий для себя" minWidth="20" prefWidth="20" minHeight="20" prefHeight="20" style="-fx-padding: 1; -fx-background-color: transparent; -fx-border-color: transparent; -fx-cursor: hand;">
+                        <graphic><SVGPath content="M 3 17.25 L 3 21 L 6.75 21 L 17.81 9.94 L 14.06 6.19 Z M 20.71 7.04 L 16.97 3.29 C 16.58 2.9 15.95 2.9 15.56 3.29 L 13.73 5.12 L 18.88 10.27 L 20.71 8.44 C 21.1 8.05 21.1 7.42 20.71 7.04 Z" fill="#606060" scaleX="0.75" scaleY="0.75" /></graphic>
+                      </Button>
+                    </HBox>
+                    <TextArea fx:id="internalComment" minWidth="0" prefRowCount="3" prefWidth="180" wrapText="true" />
+                  </VBox>
+                </HBox>
+              </HBox>
+            </VBox>
+              <HBox alignment="TOP_LEFT" spacing="12">
+<VBox minWidth="0" prefWidth="340" spacing="0" style="-fx-padding: 0; -fx-spacing: 0;" styleClass="card" HBox.hgrow="ALWAYS">
+            <VBox spacing="10">
+              <padding><Insets bottom="10" left="14" right="14" top="14" /></padding>
+              <Label text="Принято в ремонт">
+                                 <styleClass>
+                                    <String fx:value="heading" />
+                                    <String fx:value="client-name" />
+                                 </styleClass></Label>
+              <HBox alignment="CENTER_LEFT" spacing="8">
+                <Label styleClass="heading" text="Велосипед" wrapText="true" />
+                <ComboBox fx:id="bicycle" maxWidth="Infinity" minWidth="0" prefHeight="39.0" prefWidth="240" promptText="Выберите велосипед и нажмите Enter" HBox.hgrow="ALWAYS" />
+              </HBox>
+            </VBox>
+            <fx:include fx:id="customerPartsView" maxHeight="Infinity" source="CustomerParts.fxml" VBox.vgrow="ALWAYS" />
+          </VBox>
+<VBox minWidth="0" prefWidth="340" spacing="10" styleClass="card" HBox.hgrow="ALWAYS">
+              <Label styleClass="client-name" text="Trello" wrapText="true" />
+              <Label styleClass="heading" text="Доска Trello" wrapText="true" />
+              <ComboBox fx:id="board" maxWidth="Infinity" />
+              <Label styleClass="heading" text="Колонка Trello" wrapText="true" />
+              <ComboBox fx:id="list" maxWidth="Infinity" />
+              <Label styleClass="heading" text="Метки Trello" wrapText="true" />
+              <ComboBox fx:id="labels" maxWidth="Infinity" promptText="Выберите метки Trello" />
+              <Button onAction="#refreshTrello" styleClass="card" text="Обновить из Trello" />
+            </VBox>
+              </HBox>
+            </VBox>
+          </HBox>
+          <HBox fx:id="orderLines" maxHeight="Infinity" spacing="12" VBox.vgrow="ALWAYS">
+          <VBox maxHeight="Infinity" maxWidth="Infinity" minWidth="0" spacing="10" styleClass="card" HBox.hgrow="ALWAYS">
+            <Label styleClass="heading" text="Услуги" wrapText="true" />
+            <HBox alignment="CENTER_LEFT" spacing="8">
+              <ComboBox fx:id="service" maxWidth="Infinity" promptText="Выберите услугу и нажмите Enter" HBox.hgrow="ALWAYS" />
+            </HBox>
+            <TableView fx:id="services" maxHeight="Infinity" maxWidth="Infinity" minHeight="80.0" minWidth="0" prefHeight="150.0" VBox.vgrow="ALWAYS">
+              <columns>
+                <TableColumn fx:id="serviceName" minWidth="140" prefWidth="420" text="Услуга" />
+                <TableColumn fx:id="price" minWidth="80" prefWidth="150" text="Стоимость" />
+                <TableColumn fx:id="discount" minWidth="100" prefWidth="180" text="Скидка" />
+                <TableColumn fx:id="finalPrice" minWidth="80" prefWidth="150" text="Итого" />
+              </columns>
+            </TableView>
+            <Label fx:id="summary" styleClass="heading" wrapText="true" />
+          </VBox>
+          <fx:include fx:id="productsView" maxHeight="Infinity" source="Products.fxml" HBox.hgrow="ALWAYS" />
+          </HBox>
+          <Label fx:id="grandTotal" alignment="BOTTOM_LEFT" maxHeight="Infinity" styleClass="heading" VBox.vgrow="ALWAYS" />
+          <Label fx:id="status" styleClass="status" wrapText="true" />
+        </VBox>
+      </content>
+    </ScrollPane>
+  </center>
+</BorderPane>
+
+

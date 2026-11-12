@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<BorderPane stylesheets="@theme.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.bike.fx.catalog.CatalogController" fx:id="root" prefWidth="1250" prefHeight="820">
+  <left>
+    <VBox spacing="10" styleClass="toolbar" prefWidth="200" minWidth="200" maxWidth="200">
+      <Label styleClass="toolbar-heading" text="ДЕЙСТВИЯ" />
+      <Button text="Создать" onAction="#create">
+        <graphic>
+          <StackPane prefWidth="28" prefHeight="28" minWidth="28" minHeight="28" styleClass="icon-tile">
+            <SVGPath content="M 8 2 V 14 M 2 8 H 14" fill="TRANSPARENT" stroke="#606060" strokeWidth="1.4" />
+          </StackPane>
+        </graphic>
+      </Button>
+      <Button fx:id="editButton" text="Редактировать" onAction="#edit">
+        <graphic>
+          <StackPane prefWidth="28" prefHeight="28" minWidth="28" minHeight="28" styleClass="icon-tile">
+            <SVGPath content="M 2 12 L 3 9 L 10 2 L 13 5 L 6 12 Z M 2 12 H 6 M 9 3 L 12 6" fill="TRANSPARENT" stroke="#606060" strokeWidth="1.4" />
+          </StackPane>
+        </graphic>
+      </Button>
+      <Button fx:id="deleteButton" text="Удалить" onAction="#delete">
+        <graphic>
+          <StackPane prefWidth="28" prefHeight="28" minWidth="28" minHeight="28" styleClass="icon-tile">
+            <SVGPath content="M 3 4 H 13 M 5 4 V 2 H 11 V 4 M 4 5 L 5 14 H 11 L 12 5 M 6 7 V 12 M 10 7 V 12" fill="TRANSPARENT" stroke="#606060" strokeWidth="1.2" />
+          </StackPane>
+        </graphic>
+      </Button>
+      <Button fx:id="saveButton" text="Сохранить" onAction="#save" managed="false" visible="false" styleClass="primary">
+        <graphic>
+          <StackPane prefWidth="28" prefHeight="28" minWidth="28" minHeight="28" styleClass="icon-tile">
+            <SVGPath content="M 2 1 H 12 L 15 4 V 15 H 1 V 1 Z M 4 1 V 6 H 11 V 1 M 4 15 V 9 H 12 V 15" fill="TRANSPARENT" stroke="#606060" strokeWidth="1.4" />
+          </StackPane>
+        </graphic>
+      </Button>
+      <Button text="Обновить" onAction="#refresh">
+        <graphic>
+          <StackPane prefWidth="28" prefHeight="28" minWidth="28" minHeight="28" styleClass="icon-tile">
+            <SVGPath content="M 14 6 A 6 6 0 1 0 14 11 M 14 1 V 6 H 9" fill="TRANSPARENT" stroke="#606060" strokeWidth="1.4" />
+          </StackPane>
+        </graphic>
+      </Button>
+    </VBox>
+  </left>
+  <center>
+    <ScrollPane fitToHeight="true" fitToWidth="true" styleClass="page-scroll">
+      <content>
+        <VBox spacing="10" styleClass="page">
+          <Label text="Услуги и цены" wrapText="true" styleClass="title" />
+          <HBox spacing="8" alignment="CENTER_LEFT">
+            <TextField fx:id="query" promptText="Название услуги" onAction="#search" HBox.hgrow="ALWAYS" />
+            <Button text="Найти" onAction="#search">
+              <graphic>
+                <StackPane prefWidth="28" prefHeight="28" minWidth="28" minHeight="28" styleClass="icon-tile">
+                  <SVGPath content="M 11 6 A 5 5 0 1 0 1 6 A 5 5 0 1 0 11 6 M 10 10 L 15 15" fill="TRANSPARENT" stroke="#606060" strokeWidth="1.4" />
+                </StackPane>
+              </graphic>
+            </Button>
+          </HBox>
+          <HBox spacing="16" VBox.vgrow="ALWAYS">
+            <ListView fx:id="services" prefWidth="360" prefHeight="580" />
+            <VBox spacing="10" styleClass="card" HBox.hgrow="ALWAYS">
+              <Label text="Услуга" wrapText="true" styleClass="heading" />
+              <Label text="Название" wrapText="true" />
+              <TextField fx:id="name" promptText="" />
+              <Label text="Описание" wrapText="true" />
+              <TextArea fx:id="description" wrapText="true" prefRowCount="3" VBox.vgrow="ALWAYS" />
+              <Label text="Цена" wrapText="true" />
+              <TextField fx:id="price" promptText="" />
+              <Label text="Действует с" wrapText="true" />
+              <DatePicker fx:id="date" />
+              <Label text="История цен" wrapText="true" />
+              <ListView fx:id="prices" prefHeight="180" />
+            </VBox>
+          </HBox>
+          <Label fx:id="status" wrapText="true" styleClass="status" />
+        </VBox>
+      </content>
+    </ScrollPane>
+  </center>
+</BorderPane>

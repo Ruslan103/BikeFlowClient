@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+
+<VBox fx:id="root" prefHeight="740" prefWidth="1080" spacing="12" styleClass="dialog" stylesheets="@theme.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.bike.fx.client.ClientEditorController">
+  <Label styleClass="title" text="Карточка клиента" wrapText="true" />
+  <HBox spacing="12" VBox.vgrow="ALWAYS">
+    <VBox minWidth="0" prefWidth="1" spacing="10" styleClass="card" HBox.hgrow="ALWAYS">
+      <Label styleClass="heading" text="ФИО" />
+      <VBox fx:id="form" spacing="8">
+        <Label text="Тип клиента" wrapText="true" />
+        <ComboBox fx:id="type" maxWidth="Infinity" value="Физическое лицо">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Физическое лицо" />
+              <String fx:value="Организация" />
+            </FXCollections>
+          </items>
+        </ComboBox>
+        <VBox fx:id="personFields" spacing="6">
+          <Label text="Имя" wrapText="true" />
+          <TextField fx:id="firstName" />
+          <Label text="Фамилия" wrapText="true" />
+          <TextField fx:id="lastName" />
+          <Label text="Отчество" wrapText="true" />
+          <TextField fx:id="middleName" />
+        </VBox>
+        <VBox fx:id="organizationFields" managed="false" spacing="6" visible="false">
+          <Label text="Название организации" wrapText="true" />
+          <TextField fx:id="organization" />
+          <Label text="Представитель" wrapText="true" />
+          <TextField fx:id="representative" />
+        </VBox>
+      </VBox>
+    </VBox>
+
+    <VBox minWidth="0" prefWidth="1" spacing="10" styleClass="card" HBox.hgrow="ALWAYS">
+      <Label styleClass="heading" text="Контакты" />
+      <ListView fx:id="contacts" minHeight="80" VBox.vgrow="ALWAYS" />
+      <Label text="Тип контакта" wrapText="true" />
+      <ComboBox fx:id="contactType" maxWidth="Infinity" />
+      <Label text="Контакт" wrapText="true" />
+      <TextField fx:id="contactValue" onAction="#addContact" />
+      <Label text="Комментарий" wrapText="true" />
+      <TextField fx:id="contactLabel" onAction="#addContact" />
+      <HBox alignment="CENTER_LEFT" spacing="8">
+        <Button fx:id="addContactButton" onAction="#addContact" text="Добавить" />
+        <Button fx:id="editContactButton" onAction="#editContact" text="Редактировать" />
+        <Button fx:id="deleteContactButton" onAction="#deleteContact" text="Удалить" />
+      </HBox>
+    </VBox>
+
+    <VBox minWidth="0" prefWidth="1" spacing="10" styleClass="card" HBox.hgrow="ALWAYS">
+      <Label styleClass="heading" text="Велосипеды" />
+      <ListView fx:id="bicycles" minHeight="80" VBox.vgrow="ALWAYS" />
+      <Label text="Марка" wrapText="true" />
+      <TextField fx:id="bicycleBrand" onAction="#addBicycle" />
+      <Label text="Комментарий" wrapText="true" />
+      <TextField fx:id="bicycleComment" onAction="#addBicycle" />
+      <HBox alignment="CENTER_LEFT" spacing="8">
+        <Button fx:id="addBicycleButton" onAction="#addBicycle" text="Добавить" />
+        <Button fx:id="editBicycleButton" onAction="#editBicycle" text="Редактировать" />
+        <Button fx:id="deleteBicycleButton" onAction="#deleteBicycle" text="Удалить" />
+      </HBox>
+    </VBox>
+  </HBox>
+
+  <VBox spacing="8" styleClass="card">
+    <Label styleClass="heading" text="Комментарий" />
+    <TextArea fx:id="comment" maxHeight="72" prefRowCount="2" wrapText="true" />
+  </VBox>
+
+  <HBox alignment="CENTER_LEFT" spacing="8">
+    <Button fx:id="saveButton" onAction="#save" text="Сохранить карточку">
+      <graphic>
+        <StackPane minHeight="28" minWidth="28" prefHeight="28" prefWidth="28" styleClass="icon-tile">
+          <SVGPath content="M 2 1 H 12 L 15 4 V 15 H 1 V 1 Z M 4 1 V 6 H 11 V 1 M 4 15 V 9 H 12 V 15" fill="TRANSPARENT" stroke="#606060" strokeWidth="1.4" />
+        </StackPane>
+      </graphic>
+    </Button>
+    <Button fx:id="editButton" onAction="#edit" text="Редактировать карточку">
+      <graphic>
+        <StackPane minHeight="28" minWidth="28" prefHeight="28" prefWidth="28" styleClass="icon-tile">
+          <SVGPath content="M 2 11 L 11 2 L 14 5 L 5 14 L 1 15 Z M 9 4 L 12 7" fill="TRANSPARENT" stroke="#606060" strokeWidth="1.4" />
+        </StackPane>
+      </graphic>
+    </Button>
+  </HBox>
+  <Label fx:id="status" styleClass="status" wrapText="true" />
+</VBox>

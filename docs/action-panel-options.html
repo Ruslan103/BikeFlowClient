@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Варианты панели действий — Веломастерская</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin:0; padding:28px; color:#222b36; background:#f4f3ee; font:14px/1.45 "Segoe UI",Arial,sans-serif; }
+    .page { max-width:1380px; margin:auto; }
+    h1 { margin:0 0 5px; font-size:25px; letter-spacing:-.3px; }
+    .lead { margin:0 0 22px; color:#68727d; }
+    .options { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+    .option { padding:17px; border:1px solid #d8d9d6; border-radius:12px; background:#fff; box-shadow:0 2px 8px #1c283008; }
+    .option h2 { margin:0 0 5px; font-size:16px; }
+    .option .summary { min-height:52px; margin:0 0 14px; color:#68727d; font-size:12px; }
+    .demo { height:350px; display:flex; overflow:hidden; border:1px solid #d8d9d6; border-radius:9px; background:#f4f3ee; }
+    .side { width:176px; flex:none; padding:14px 10px; border-right:1px solid #d8d9d6; background:#fff; }
+    .cap { margin:0 0 9px 8px; color:#818a92; font-size:9px; font-weight:700; letter-spacing:1px; }
+    .action { display:flex; align-items:center; gap:9px; min-height:37px; margin:4px 0; padding:7px 9px; border-radius:7px; color:#344154; font-size:11px; }
+    .action .ico { width:17px; color:#657589; font-size:15px; text-align:center; }
+    .action.active { color:#fff; background:#356fe0; font-weight:700; }
+    .action.active .ico { color:#fff; }
+    .action.muted { color:#9ba4ac; }
+    .divider { height:1px; margin:8px 5px; background:#e5e7e8; }
+    .content { min-width:0; flex:1; padding:15px; }
+    .worktitle { margin:0 0 12px; font-size:14px; font-weight:700; }
+    .line { height:11px; margin:9px 0; border-radius:6px; background:#e1e5e7; }
+    .line.short { width:58%; }
+    .card { height:94px; margin-top:15px; border:1px solid #dce0e3; border-radius:8px; background:#fff; }
+    .rail { width:58px; flex:none; display:flex; flex-direction:column; align-items:center; gap:9px; padding:13px 6px; border-right:1px solid #d8d9d6; background:#fff; }
+    .rail-item { display:grid; place-items:center; width:36px; height:36px; border-radius:8px; color:#59697d; background:#f1f3f6; font-size:16px; }
+    .rail-item.active { color:#fff; background:#356fe0; }
+    .rail-item.disabled { color:#b5bdc5; background:#f7f8f9; }
+    .top-content { width:100%; padding:12px; }
+    .toolbar { display:flex; align-items:center; gap:6px; margin:0 0 13px; padding:8px; border:1px solid #d8d9d6; border-radius:8px; background:#fff; }
+    .toolbar-title { flex:1; min-width:60px; font-size:12px; font-weight:700; }
+    .btn { min-height:30px; padding:6px 8px; border:1px solid #d0d5db; border-radius:6px; color:#344154; background:#fff; font:600 10px "Segoe UI",Arial,sans-serif; white-space:nowrap; }
+    .btn.primary { border-color:#356fe0; color:#fff; background:#356fe0; }
+    .btn.more { background:#f5f6f8; }
+    .rationale { margin:14px 0 0; color:#4d5b67; font-size:12px; }
+    .recommend { display:inline-block; margin-left:5px; padding:2px 7px; border-radius:12px; color:#285bc2; background:#e8efff; font-size:10px; font-weight:700; vertical-align:2px; }
+    @media(max-width:1000px) { body{padding:16px}.options{grid-template-columns:1fr 1fr}.option:last-child{grid-column:span 2} }
+    @media(max-width:660px) { .options{grid-template-columns:1fr}.option:last-child{grid-column:auto}.side{width:145px}.btn{padding:6px 5px;font-size:9px} }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <h1>Куда перенести действия страницы?</h1>
+    <p class="lead">Сравнение на примере экрана «Новый бланк». Те же кнопки можно адаптировать для клиентов, скидок, каталога, профилей и настроек.</p>
+    <div class="options">
+      <article class="option">
+        <h2>1. Оставить слева, оформить компактнее <span class="recommend">Моя рекомендация</span></h2>
+        <p class="summary">Сохранить привычное место, добавить заголовок группы и ясное выделение главного действия.</p>
+        <div class="demo"><aside class="side"><p class="cap">ДЕЙСТВИЯ</p><div class="action active"><span class="ico">＋</span>Новый бланк</div><div class="action"><span class="ico">▱</span>Открыть бланк</div><div class="action"><span class="ico">＃</span>Получить номер</div><div class="divider"></div><div class="action"><span class="ico">▣</span>Сохранить</div></aside><section class="content"><p class="worktitle">Новый бланк</p><div class="line"></div><div class="line short"></div><div class="card"></div></section></div>
+        <p class="rationale">Действия всегда на виду, при этом можно оставить единый паттерн на всех экранах.</p>
+      </article>
+      <article class="option">
+        <h2>2. Свернуть в вертикальную полосу</h2>
+        <p class="summary">Показывать значки без подписей; название действия появится при наведении.</p>
+        <div class="demo"><aside class="rail"><div class="rail-item active">＋</div><div class="rail-item">▱</div><div class="rail-item">＃</div><div class="rail-item">▣</div><div class="rail-item disabled">⌫</div></aside><section class="content"><p class="worktitle">Новый бланк</p><div class="line"></div><div class="line short"></div><div class="card"></div></section></div>
+        <p class="rationale">Освобождает больше места форме, но назначение значков не всегда очевидно.</p>
+      </article>
+      <article class="option">
+        <h2>3. Переместить к заголовку экрана</h2>
+        <p class="summary">Освободить левую колонку. Основные действия разместить справа от заголовка, редкие — в меню.</p>
+        <div class="demo"><section class="top-content"><div class="toolbar"><span class="toolbar-title">Новый бланк</span><button class="btn">Открыть</button><button class="btn primary">Сохранить</button><button class="btn more">Ещё　⌄</button></div><div class="line"></div><div class="line short"></div><div class="card"></div></section></div>
+        <p class="rationale">Форма получает больше ширины, но для каждого экрана придётся отдельно продумать порядок кнопок.</p>
+      </article>
+    </div>
+  </main>
+</body>
+</html>

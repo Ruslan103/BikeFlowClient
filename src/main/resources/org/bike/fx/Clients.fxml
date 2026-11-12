@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+
+<BorderPane fx:id="root" prefHeight="820" prefWidth="1250" stylesheets="@theme.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.bike.fx.client.ClientsController">
+  <left>
+    <VBox maxWidth="200" minWidth="200" prefWidth="200" spacing="10" styleClass="toolbar">
+      <Label styleClass="toolbar-heading" text="ДЕЙСТВИЯ" />
+      <Button onAction="#create" styleClass="primary" text="Создать">
+        <graphic>
+          <StackPane minHeight="28" minWidth="28" prefHeight="28" prefWidth="28" styleClass="icon-tile">
+            <SVGPath content="M 8 2 V 14 M 2 8 H 14" fill="TRANSPARENT" stroke="#606060" strokeWidth="1.4" />
+          </StackPane>
+        </graphic>
+      </Button>
+      <Button onAction="#open" text="Редактировать">
+        <graphic>
+          <StackPane minHeight="28" minWidth="28" prefHeight="28" prefWidth="28" styleClass="icon-tile">
+            <SVGPath content="M 2 12 L 3 9 L 10 2 L 13 5 L 6 12 Z M 2 12 H 6 M 9 3 L 12 6" fill="TRANSPARENT" stroke="#606060" strokeWidth="1.4" />
+          </StackPane>
+        </graphic>
+      </Button>
+      <Button fx:id="deleteButton" text="Удалить">
+        <graphic>
+          <StackPane minHeight="28" minWidth="28" prefHeight="28" prefWidth="28" styleClass="icon-tile">
+            <SVGPath content="M 3 4 H 13 M 5 4 V 2 H 11 V 4 M 4 5 L 5 14 H 11 L 12 5 M 6 7 V 12 M 10 7 V 12" fill="TRANSPARENT" stroke="#606060" strokeWidth="1.2" />
+          </StackPane>
+        </graphic>
+      </Button>
+      <Button onAction="#search" text="Обновить">
+        <graphic>
+          <StackPane minHeight="28" minWidth="28" prefHeight="28" prefWidth="28" styleClass="icon-tile">
+            <SVGPath content="M 14 6 A 6 6 0 1 0 14 11 M 14 1 V 6 H 9" fill="TRANSPARENT" stroke="#606060" strokeWidth="1.4" />
+          </StackPane>
+        </graphic>
+      </Button>
+      <Button fx:id="chooseButton" managed="false" onAction="#choose" text="Выбрать клиента" visible="false">
+        <graphic>
+          <StackPane minHeight="28" minWidth="28" prefHeight="28" prefWidth="28" styleClass="icon-tile">
+            <SVGPath content="M 2 8 L 6 12 L 14 3" fill="TRANSPARENT" stroke="#606060" strokeWidth="1.4" />
+          </StackPane>
+        </graphic>
+      </Button>
+    </VBox>
+  </left>
+  <center>
+    <ScrollPane fitToHeight="true" fitToWidth="true" styleClass="page-scroll">
+      <content>
+        <VBox spacing="10" styleClass="page">
+          <Label styleClass="title" text="Клиенты" wrapText="true" />
+          <HBox alignment="CENTER_LEFT" spacing="8">
+            <TextField fx:id="query" onAction="#search" promptText="Телефон, ФИО, организация или контакт" HBox.hgrow="ALWAYS" />
+            <Button onAction="#search" prefHeight="3.0" prefWidth="99.0" text="Найти">
+              <graphic>
+                <StackPane minHeight="28" minWidth="28" prefHeight="28" prefWidth="28" styleClass="icon-tile">
+                  <SVGPath content="M 11 6 A 5 5 0 1 0 1 6 A 5 5 0 1 0 11 6 M 10 10 L 15 15" fill="TRANSPARENT" stroke="#606060" strokeWidth="1.4" />
+                </StackPane>
+              </graphic>
+            </Button>
+          </HBox>
+          <HBox alignment="TOP_LEFT" spacing="12" VBox.vgrow="ALWAYS">
+            <VBox minWidth="240" prefWidth="300" spacing="6" HBox.hgrow="ALWAYS">
+              <Label styleClass="heading" text="Список клиентов" />
+              <ListView fx:id="clients" prefHeight="587.0" prefWidth="273.0" VBox.vgrow="ALWAYS" />
+            </VBox>
+            <VBox minWidth="280" prefWidth="350" spacing="6" HBox.hgrow="ALWAYS">
+              <Label styleClass="heading" text="Данные клиента" />
+              <TextArea fx:id="details" editable="false" prefHeight="643.0" prefRowCount="20" prefWidth="341.0" wrapText="true" VBox.vgrow="ALWAYS" />
+            </VBox>
+            <VBox minWidth="280" prefWidth="350" spacing="6" HBox.hgrow="ALWAYS">
+              <Label styleClass="heading" text="Список бланков" />
+              <ListView fx:id="workOrders" prefHeight="570" VBox.vgrow="ALWAYS" />
+            </VBox>
+          </HBox>
+          <Label fx:id="status" styleClass="status" wrapText="true" />
+        </VBox>
+      </content>
+    </ScrollPane>
+  </center>
+</BorderPane>

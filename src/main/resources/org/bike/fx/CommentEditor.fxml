@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.ButtonType?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.VBox?>
+<DialogPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.bike.fx.workorder.CommentEditorController" prefWidth="720" prefHeight="460" stylesheets="@theme.css">
+  <content>
+    <VBox>
+      <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+      <TextArea fx:id="text" wrapText="true" prefRowCount="18" VBox.vgrow="ALWAYS" />
+    </VBox>
+  </content>
+  <buttonTypes>
+    <ButtonType text="Сохранить" buttonData="OK_DONE" />
+    <ButtonType text="Отмена" buttonData="CANCEL_CLOSE" />
+  </buttonTypes>
+</DialogPane>

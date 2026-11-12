@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<DialogPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.bike.fx.workorder.ProductEditorController" stylesheets="@theme.css" prefWidth="520" prefHeight="-1" minHeight="-1">
+  <content>
+    <GridPane hgap="12" vgap="10">
+      <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>
+      <columnConstraints>
+        <ColumnConstraints percentWidth="18" minWidth="0"/>
+        <ColumnConstraints percentWidth="27" minWidth="0" hgrow="ALWAYS"/>
+        <ColumnConstraints percentWidth="25" minWidth="0"/>
+        <ColumnConstraints percentWidth="30" minWidth="0" hgrow="ALWAYS"/>
+      </columnConstraints>
+      <Label text="Название" GridPane.rowIndex="0"/><TextField fx:id="name" minWidth="0" promptText="Название товара" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="0"/>
+      <Label text="Единица" GridPane.rowIndex="1"/><TextField fx:id="unit" minWidth="0" text="шт" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+      <Label text="Артикул" GridPane.columnIndex="2" GridPane.rowIndex="1"/><TextField fx:id="article" minWidth="0" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+      <Label text="Количество" wrapText="true" GridPane.rowIndex="2"/><TextField fx:id="quantity" minWidth="0" text="1" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+      <Label text="Цена за единицу" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2"/><TextField fx:id="price" minWidth="0" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+      <Label text="Скидка" GridPane.rowIndex="3"/><ComboBox fx:id="discount" GridPane.columnSpan="3" minWidth="0" maxWidth="Infinity" promptText="Без скидки" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+      <Label text="Обеспечение" GridPane.rowIndex="4"/><ComboBox fx:id="supply" GridPane.columnSpan="3" minWidth="0" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+      <Label fx:id="validation" wrapText="true" styleClass="status" GridPane.rowIndex="5" GridPane.columnSpan="4"/>
+    </GridPane>
+  </content>
+  <buttonTypes><ButtonType text="Сохранить" buttonData="OK_DONE"/><ButtonType text="Отмена" buttonData="CANCEL_CLOSE"/></buttonTypes>
+</DialogPane>
+
+

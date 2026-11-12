@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane fx:id="root" prefHeight="820" prefWidth="1250" styleClass="page" stylesheets="@theme.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.bike.fx.settings.SettingsController">
+  <center>
+    <TabPane tabClosingPolicy="UNAVAILABLE">
+      <tabs>
+        <Tab text="Настройки бланка">
+          <VBox spacing="12" styleClass="page">
+            <Label styleClass="title" text="Настройки бланка" />
+            <VBox spacing="10" styleClass="card">
+              <Label styleClass="heading" text="Комментарий к заказу по умолчанию" wrapText="true" />
+              <TextArea fx:id="defaultComment" prefRowCount="8" wrapText="true" />
+            </VBox>
+            <Button onAction="#saveDefaultComment" styleClass="primary" text="Сохранить" />
+            <Label fx:id="formStatus" styleClass="status" wrapText="true" />
+          </VBox>
+        </Tab>
+        <Tab text="Настройки сервера">
+          <VBox spacing="12" styleClass="page">
+            <Label styleClass="title" text="Настройки сервера" />
+            <VBox spacing="10" styleClass="card">
+              <Label styleClass="heading" text="Адрес сервера" wrapText="true" />
+              <TextField fx:id="url" promptText="https://localhost:8443" />
+              <Label text="При сохранении адреса сертификат сервера будет загружен автоматически." wrapText="true" />
+            </VBox>
+            <HBox spacing="10">
+              <Button fx:id="saveServerButton" onAction="#save" styleClass="primary" text="Сохранить" />
+              <Button fx:id="refreshCertificateButton" onAction="#refreshCertificate" text="Обновить сертификат" />
+            </HBox>
+            <Label fx:id="serverStatus" styleClass="status" wrapText="true" />
+          </VBox>
+        </Tab>
+      </tabs>
+    </TabPane>
+  </center>
+</BorderPane>

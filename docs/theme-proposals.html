@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Варианты темы — Веломастерская</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 28px; color: #18221e; background: #eef1ef; font: 14px/1.45 "Segoe UI", Arial, sans-serif; }
+    .proposal { max-width: 1450px; margin: auto; }
+    .intro { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin: 0 0 20px; }
+    h1 { margin: 0 0 5px; font-size: 24px; letter-spacing: -.4px; }
+    .intro p { margin: 0; color: #66716b; }
+    .switcher { display: flex; gap: 8px; flex-wrap: wrap; }
+    .switcher button { border: 1px solid #d0d8d3; border-radius: 9px; background: #fff; color: #35443b; padding: 9px 13px; font: inherit; font-weight: 600; cursor: pointer; }
+    .switcher button[aria-pressed="true"] { background: #233e32; border-color: #233e32; color: white; }
+    .app { --canvas:#f4f6f4; --surface:#fff; --surface-alt:#f7f9f7; --ink:#202a25; --muted:#718078; --line:#dce3de; --accent:#28734f; --accent-hover:#205d40; --accent-soft:#e7f2eb; --sidebar:#263a31; --sidebar-ink:#eef5f0; --sidebar-muted:#b6c8bd; --focus:#79b48f; --danger:#b84545; min-height: 790px; overflow: hidden; border: 1px solid var(--line); border-radius: 16px; background: var(--canvas); box-shadow: 0 16px 48px #17261b1c; color: var(--ink); }
+    .app.theme-graphite { --canvas:#f3f4f6; --surface:#fff; --surface-alt:#f7f8fa; --ink:#202630; --muted:#737d8b; --line:#dce0e6; --accent:#355fc0; --accent-hover:#294eaa; --accent-soft:#eaf0ff; --sidebar:#202936; --sidebar-ink:#f3f5f8; --sidebar-muted:#aeb9c8; --focus:#82a2f0; --danger:#bf4848; }
+    .app.theme-copper { --canvas:#f7f3ee; --surface:#fffdfa; --surface-alt:#faf6f1; --ink:#332c26; --muted:#83766b; --line:#e7ddd2; --accent:#a95835; --accent-hover:#8f472b; --accent-soft:#f7eae1; --sidebar:#46372e; --sidebar-ink:#fff8f2; --sidebar-muted:#d5c3b6; --focus:#d39170; --danger:#b84545; }
+    .app.theme-classic { --canvas:#f2f5f8; --surface:#fff; --surface-alt:#f6f8fa; --ink:#202d3b; --muted:#637486; --line:#d6e0e8; --accent:#2474a8; --accent-hover:#1b5e8a; --accent-soft:#e4f1f9; --sidebar:#233b50; --sidebar-ink:#f5f9fc; --sidebar-muted:#b7cad9; --focus:#73b3dd; --danger:#b43c42; }
+    .app.theme-dark { --canvas:#171c20; --surface:#22292e; --surface-alt:#2a3238; --ink:#edf1f2; --muted:#a1adb2; --line:#3b464d; --accent:#55c795; --accent-hover:#43b481; --accent-soft:#263e36; --sidebar:#11171b; --sidebar-ink:#edf1f2; --sidebar-muted:#a1adb2; --focus:#65d8a7; --danger:#ff7777; }
+    .app.theme-contrast { --canvas:#f6f7f8; --surface:#fff; --surface-alt:#f2f4f5; --ink:#111820; --muted:#4e5a64; --line:#aeb9c1; --accent:#005a9c; --accent-hover:#004779; --accent-soft:#e3f2ff; --sidebar:#152635; --sidebar-ink:#fff; --sidebar-muted:#d3e0e9; --focus:#006fc1; --danger:#a51f2b; }
+    .app.theme-emblem { --canvas:#f4f3ee; --surface:#fff; --surface-alt:#f7f6f1; --ink:#222b36; --muted:#68727d; --line:#d8d9d6; --accent:#356fe0; --accent-hover:#285bc2; --accent-soft:#e8efff; --sidebar:#253347; --sidebar-ink:#fff; --sidebar-muted:#c4cfde; --focus:#7ba1f4; --danger:#b33e38; }
+    .app.theme-emblem .brand-mark { background:#f4e541; color:#27354a; }
+    .app.theme-emblem .nav.active { box-shadow:inset 3px 0 #f4e541; }
+    .app.theme-emblem .card-icon { background:#fff6bd; color:#655500; }
+    .app.theme-emblem .summary { background:#fff6bd; color:#34425a; }
+    .app.theme-pink { --canvas:#f8f2f5; --surface:#fff; --surface-alt:#fbf6f8; --ink:#352833; --muted:#816f7c; --line:#eadde6; --accent:#c84f83; --accent-hover:#aa3d6d; --accent-soft:#f9e7ef; --sidebar:#493342; --sidebar-ink:#fff8fc; --sidebar-muted:#d9c4d1; --focus:#dc83a8; --danger:#b63d48; }
+    .app.theme-purple { --canvas:#f4f2f8; --surface:#fff; --surface-alt:#f8f6fb; --ink:#2b2738; --muted:#756d87; --line:#e0dbea; --accent:#7653c6; --accent-hover:#6141a9; --accent-soft:#eee8fb; --sidebar:#342a49; --sidebar-ink:#faf8ff; --sidebar-muted:#c9c0dc; --focus:#a58bdf; --danger:#b34155; }
+    .topbar { height: 64px; display:flex; align-items:center; gap:14px; padding:0 23px; border-bottom:1px solid var(--line); background:var(--surface); }
+    .brand-mark { display:grid; place-items:center; width:32px; height:32px; border-radius:10px; color:white; background:var(--accent); font-size:18px; font-weight:700; }
+    .brand { font-size:15px; font-weight:700; letter-spacing:-.15px; }
+    .top-spacer { flex:1; }
+    .connection { display:flex; align-items:center; gap:7px; color:var(--muted); font-size:12px; }
+    .dot { width:8px; height:8px; border-radius:50%; background:#3eaa6d; }
+    .profile { min-width:174px; padding:9px 12px; color:var(--ink); border:1px solid var(--line); border-radius:8px; background:var(--surface); }
+    .workspace { display:flex; min-height:725px; }
+    .sidebar { width:218px; flex:none; padding:20px 12px; background:var(--sidebar); color:var(--sidebar-ink); }
+    .nav-caption { padding:4px 12px 10px; color:var(--sidebar-muted); font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; }
+    .nav { display:flex; align-items:center; gap:11px; margin:3px 0; padding:11px 12px; border-radius:8px; color:var(--sidebar-muted); font-weight:550; }
+    .nav.active { background:#ffffff1b; color:var(--sidebar-ink); box-shadow:inset 3px 0 var(--accent); }
+    .nav-icon { display:inline-grid; width:19px; text-align:center; font-size:16px; }
+    .sidebar-bottom { margin-top:32px; padding:13px 12px; border-top:1px solid #ffffff20; color:var(--sidebar-muted); font-size:12px; }
+    .main { min-width:0; flex:1; padding:23px 26px 20px; }
+    .page-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:17px; }
+    .eyebrow { margin:0 0 3px; color:var(--muted); font-size:11px; }
+    h2 { margin:0; font-size:22px; letter-spacing:-.4px; }
+    .head-note { color:var(--muted); font-size:12px; }
+    .step { display:flex; gap:7px; margin-bottom:16px; }
+    .step span { border-radius:20px; background:var(--surface); border:1px solid var(--line); color:var(--muted); padding:6px 11px; font-size:11px; }
+    .step .current { color:var(--accent); border-color:var(--accent); background:var(--accent-soft); font-weight:700; }
+    .grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; }
+    .card { min-width:0; padding:16px; border:1px solid var(--line); border-radius:11px; background:var(--surface); box-shadow:0 2px 6px #24332908; }
+    .card-title { display:flex; align-items:center; gap:9px; margin:0 0 14px; font-size:14px; font-weight:700; }
+    .card-icon { display:grid; place-items:center; width:27px; height:27px; border-radius:8px; background:var(--accent-soft); color:var(--accent); font-size:14px; }
+    .field { margin:0 0 12px; }
+    label { display:block; margin-bottom:5px; color:var(--muted); font-size:11px; font-weight:600; }
+    .input, .select, .textarea { width:100%; min-height:37px; padding:9px 10px; border:1px solid var(--line); border-radius:7px; color:var(--ink); background:var(--surface); font:inherit; font-size:12px; }
+    .input.focused { border-color:var(--focus); box-shadow:0 0 0 3px color-mix(in srgb, var(--focus) 20%, transparent); }
+    .textarea { min-height:51px; color:#7d8781; }
+    .person { padding:11px 12px; border-radius:8px; background:var(--surface-alt); margin-bottom:11px; }
+    .person strong { display:block; margin-bottom:3px; font-size:13px; }
+    .person small { color:var(--muted); font-size:11px; }
+    .row { display:flex; gap:8px; align-items:center; }
+    .row .field { flex:1; }
+    .btn { min-height:35px; padding:8px 11px; display:inline-flex; align-items:center; justify-content:center; gap:7px; border-radius:7px; border:1px solid var(--line); background:var(--surface); color:var(--ink); font:600 11px "Segoe UI",Arial,sans-serif; white-space:nowrap; }
+    .btn.primary { color:white; background:var(--accent); border-color:var(--accent); box-shadow:0 1px 2px #00000012; }
+    .btn.primary:hover { background:var(--accent-hover); }
+    .btn.soft { color:var(--accent); border-color:transparent; background:var(--accent-soft); }
+    .btn.danger { color:var(--danger); }
+    .button-row { display:flex; gap:7px; flex-wrap:wrap; margin-top:2px; }
+    .service-card { margin-top:14px; }
+    .service-head { display:flex; align-items:center; gap:12px; margin-bottom:12px; }
+    .service-head .card-title { flex:1; margin:0; }
+    .search { flex:1; }
+    .table { width:100%; border-collapse:collapse; font-size:11px; }
+    .table th { padding:9px 10px; color:var(--muted); background:var(--surface-alt); text-align:left; font-weight:600; }
+    .table td { padding:10px; border-bottom:1px solid var(--line); }
+    .table td:last-child,.table th:last-child { text-align:right; }
+    .table tfoot td { border:0; font-weight:700; font-size:13px; }
+    .summary { display:flex; justify-content:space-between; align-items:center; margin-top:12px; padding:11px 13px; border-radius:8px; background:var(--accent-soft); color:var(--accent); font-size:12px; font-weight:700; }
+    .footer { display:flex; align-items:center; gap:10px; margin-top:15px; padding-top:14px; border-top:1px solid var(--line); }
+    .footer-status { flex:1; color:var(--muted); font-size:11px; }
+    .screen-label { position:fixed; right:18px; bottom:15px; padding:8px 12px; border-radius:9px; background:#202a25; color:#fff; font-size:11px; opacity:.86; }
+    .action-proposals { margin:34px 0 10px; }
+    .action-proposals h2 { margin-bottom:5px; }
+    .action-proposals > p { margin:0 0 16px; color:#66716b; }
+    .action-options { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+    .action-option { padding:16px; border:1px solid #dce3de; border-radius:12px; background:#fff; }
+    .action-option h3 { margin:0 0 4px; font-size:15px; }
+    .action-option .desc { min-height:36px; margin:0 0 12px; color:#718078; font-size:12px; }
+    .mini-app { height:190px; overflow:hidden; display:flex; border:1px solid #dce3de; border-radius:9px; background:#f4f6f4; }
+    .mini-side { width:156px; flex:none; padding:12px 9px; border-right:1px solid #dce3de; background:#fff; }
+    .mini-cap { margin:0 0 8px 6px; color:#829087; font-size:9px; font-weight:700; letter-spacing:.8px; }
+    .mini-action { display:flex; align-items:center; gap:8px; min-height:32px; margin:3px 0; padding:5px 8px; border-radius:6px; color:#36443b; font-size:10px; }
+    .mini-action em { width:18px; color:#718078; font-style:normal; text-align:center; font-size:13px; }
+    .mini-action.selected { color:#fff; background:#356fe0; font-weight:700; }
+    .mini-action.selected em { color:#fff; }
+    .mini-content { min-width:0; flex:1; padding:12px; }
+    .mini-title { margin:0 0 10px; font-weight:700; font-size:12px; }
+    .mini-line { height:10px; margin:8px 0; border-radius:5px; background:#e1e6e2; }
+    .mini-line.short { width:62%; }
+    .mini-card { height:88px; margin-top:12px; border:1px solid #dce3de; border-radius:7px; background:#fff; }
+    .icon-rail { width:56px; flex:none; padding:10px 7px; display:flex; flex-direction:column; align-items:center; gap:7px; border-right:1px solid #dce3de; background:#fff; }
+    .rail-icon { display:grid; place-items:center; width:34px; height:34px; border-radius:8px; color:#536257; background:#f1f4f1; font-size:15px; }
+    .rail-icon.active { color:#fff; background:#356fe0; }
+    .rail-icon.disabled { color:#aeb7b1; background:#f7f8f7; }
+    .mini-toolbar { display:flex; align-items:center; gap:6px; margin:0 0 11px; padding:8px; border:1px solid #dce3de; border-radius:8px; background:#fff; }
+    .mini-toolbar-title { flex:1; min-width:45px; font-size:11px; font-weight:700; }
+    .mini-btn { padding:6px 7px; border:1px solid #dce3de; border-radius:6px; color:#35443b; background:#fff; font-size:9px; white-space:nowrap; }
+    .mini-btn.primary { border-color:#356fe0; color:#fff; background:#356fe0; }
+    .mini-btn.more { color:#536257; background:#f7f9f7; }
+    .note { margin:12px 0 0; color:#48564d; font-size:11px; }
+    .note strong { color:#263a31; }
+    @media(max-width:950px) { body{padding:12px}.intro{align-items:start;flex-direction:column}.sidebar{width:175px}.main{padding:18px}.grid{grid-template-columns:1fr 1fr}.grid .card:last-child{grid-column:span 2}.app{min-height:900px} }
+    @media(max-width:950px) { .action-options{grid-template-columns:1fr 1fr}.action-option:last-child{grid-column:span 2} }
+    @media(max-width:680px) { .action-options{grid-template-columns:1fr}.action-option:last-child{grid-column:auto}.mini-side{width:138px}.mini-toolbar{gap:3px}.mini-btn{padding:6px 5px;font-size:8px} }
+    @media(max-width:680px) { .sidebar{display:none}.grid{grid-template-columns:1fr}.grid .card:last-child{grid-column:auto}.main{padding:14px}.connection,.head-note{display:none}.app{min-height:100vh}.footer{flex-wrap:wrap} }
+  </style>
+</head>
+<body>
+  <div class="proposal">
+    <header class="intro">
+      <div><h1>Обновление темы приложения</h1><p>Один экран, девять визуальных направлений. Переключайте варианты и сравнивайте кнопки, поля и навигацию.</p></div>
+      <div class="switcher" role="group" aria-label="Вариант темы">
+        <button type="button" data-theme="forest" aria-pressed="true">01 · Мастерская</button>
+        <button type="button" data-theme="graphite" aria-pressed="false">02 · Техно</button>
+        <button type="button" data-theme="copper" aria-pressed="false">03 · Крафт</button>
+        <button type="button" data-theme="classic" aria-pressed="false">04 · Классика</button>
+        <button type="button" data-theme="dark" aria-pressed="false">05 · Тёмная</button>
+        <button type="button" data-theme="contrast" aria-pressed="false">06 · Контраст</button>
+        <button type="button" data-theme="emblem" aria-pressed="false">07 · Эмблема</button>
+        <button type="button" data-theme="pink" aria-pressed="false">08 · Розовая</button>
+        <button type="button" data-theme="purple" aria-pressed="false">09 · Фиолетовая</button>
+      </div>
+    </header>
+    <main class="app theme-forest" id="app">
+      <div class="topbar"><div class="brand-mark">⚒</div><div class="brand">Веломастерская</div><div class="top-spacer"></div><div class="connection"><i class="dot"></i>Подключено</div><div class="profile">Мастерская · Основной профиль　⌄</div><button class="btn">⚙　Профиль</button></div>
+      <div class="workspace">
+        <aside class="sidebar"><div class="nav-caption">Работа</div><div class="nav active"><span class="nav-icon">▤</span>Бланк</div><div class="nav"><span class="nav-icon">♙</span>Клиенты</div><div class="nav"><span class="nav-icon">⚒</span>Услуги и цены</div><div class="nav"><span class="nav-icon">％</span>Скидки</div><div class="nav-caption" style="margin-top:22px">Система</div><div class="nav"><span class="nav-icon">◎</span>Профили</div><div class="nav"><span class="nav-icon">⚙</span>Настройки</div><div class="sidebar-bottom">Версия приложения<br>Craft Biker · 1.0</div></aside>
+        <section class="main">
+          <div class="page-head"><div><p class="eyebrow">Заказ-наряд　/　Новый</p><h2>Новый бланк</h2></div><span class="head-note">Шаг 1 из 2 · Данные заказа</span></div>
+          <div class="step"><span class="current">1　Данные и клиент</span><span>2　Проверка и сохранение</span></div>
+          <div class="grid">
+            <section class="card"><h3 class="card-title"><i class="card-icon">♙</i>Клиент и велосипед</h3><div class="field"><label>Найти клиента</label><input class="input focused" value="Иван Петров" aria-label="Найти клиента"></div><div class="person"><strong>Иван Петров</strong><small>+7 (999) 123-45-67 · Постоянный клиент</small></div><div class="button-row"><button class="btn primary">＋ Создать</button><button class="btn soft">Карточка клиента</button></div><div class="field" style="margin-top:14px"><label>Велосипед</label><div class="select">Trek Marlin 7 · чёрный　⌄</div></div><div class="button-row"><button class="btn">＋ Велосипед</button><button class="btn">Контакт для бланка　⌄</button></div></section>
+            <section class="card"><h3 class="card-title"><i class="card-icon">▣</i>Данные бланка</h3><div class="row"><div class="field"><label>Номер</label><input class="input" value="04281"></div><div class="field"><label>Дата</label><input class="input" value="07.11.2026"></div></div><div class="field"><label>Заявленная неисправность</label><div class="textarea">Скрипит задний тормоз, проверить переключение</div></div><div class="field"><label>Комментарий к заказу</label><div class="textarea">Позвонить перед заменой деталей</div></div><div class="field" style="margin:0"><label>Комментарий для себя</label><div class="input">Проверить износ колодок</div></div></section>
+            <section class="card"><h3 class="card-title"><i class="card-icon">↗</i>Интеграция Trello</h3><div class="field"><label>Доска Trello</label><div class="select">Ремонт · Основная доска　⌄</div></div><div class="field"><label>Колонка</label><div class="select">В работе　⌄</div></div><div class="field"><label>Метки</label><div class="select">Ремонт, Ожидает　⌄</div></div><button class="btn soft" style="width:100%;margin-top:2px">↻　Обновить из Trello</button><div style="margin-top:18px"><label>Стили кнопок</label><div class="button-row"><button class="btn primary">Основная</button><button class="btn">Обычная</button><button class="btn soft">Акцентная</button></div></div></section>
+          </div>
+          <section class="card service-card"><div class="service-head"><h3 class="card-title"><i class="card-icon">⚒</i>Услуги</h3><input class="input search" placeholder="Найти услугу в каталоге" aria-label="Найти услугу"><button class="btn primary">＋ Добавить услугу</button></div><table class="table"><thead><tr><th>Услуга</th><th>Стоимость</th><th>Скидка</th><th>Итого</th></tr></thead><tbody><tr><td>Диагностика тормозной системы</td><td>900 ₽</td><td>—</td><td>900 ₽</td></tr><tr><td>Настройка заднего переключателя</td><td>700 ₽</td><td>10%</td><td>630 ₽</td></tr></tbody><tfoot><tr><td colspan="3">Итого к оплате</td><td>1 530 ₽</td></tr></tfoot></table><div class="summary"><span>2 услуги　·　Скидка 70 ₽</span><span>К оплате　1 530 ₽</span></div></section>
+          <div class="footer"><span class="footer-status">Черновик готов к сохранению</span><button class="btn">Отменить</button><button class="btn primary">✓　Сохранить бланк</button></div>
+        </section>
+      </div>
+    </main>
+    <section class="action-proposals">
+      <h2>Как показывать действия страницы</h2>
+      <p>Сейчас на разных экранах слева находятся действия вроде «Создать», «Сохранить», «Обновить» и «Удалить». Вот три варианта оформления.</p>
+      <div class="action-options">
+        <article class="action-option">
+          <h3>01 · Компактная боковая группа</h3>
+          <p class="desc">Оставить привычное место, уменьшить ширину и разделить главные и вторичные действия.</p>
+          <div class="mini-app"><div class="mini-side"><p class="mini-cap">ДЕЙСТВИЯ</p><div class="mini-action selected"><em>＋</em>Новый бланк</div><div class="mini-action"><em>▱</em>Открыть бланк</div><div class="mini-action"><em>＃</em>Получить номер</div><div style="height:1px;background:#e5e9e6;margin:7px 5px"></div><div class="mini-action"><em>▣</em>Сохранить</div></div><div class="mini-content"><p class="mini-title">Новый бланк</p><div class="mini-line"></div><div class="mini-line short"></div><div class="mini-card"></div></div></div>
+          <p class="note"><strong>Плюс:</strong> легко найти действия, экран остаётся предсказуемым.</p>
+        </article>
+        <article class="action-option">
+          <h3>02 · Узкая полоса значков</h3>
+          <p class="desc">Сэкономить ширину, показывая подписи во всплывающей подсказке при наведении.</p>
+          <div class="mini-app"><div class="icon-rail"><div class="rail-icon active">＋</div><div class="rail-icon">▱</div><div class="rail-icon">＃</div><div class="rail-icon">▣</div><div class="rail-icon disabled">⌫</div></div><div class="mini-content"><p class="mini-title">Новый бланк</p><div class="mini-line"></div><div class="mini-line short"></div><div class="mini-card"></div></div></div>
+          <p class="note"><strong>Компромисс:</strong> больше места форме, но действия без подсказок менее очевидны.</p>
+        </article>
+        <article class="action-option">
+          <h3>03 · Действия у заголовка</h3>
+          <p class="desc">Убрать постоянную колонку слева; главное действие оставить справа от названия экрана.</p>
+          <div class="mini-app"><div class="mini-content" style="padding:10px;width:100%"><div class="mini-toolbar"><span class="mini-toolbar-title">Новый бланк</span><button class="mini-btn">Открыть</button><button class="mini-btn primary">Сохранить</button><button class="mini-btn more">Ещё　⌄</button></div><div class="mini-line"></div><div class="mini-line short"></div><div class="mini-card"></div></div></div>
+          <p class="note"><strong>Плюс:</strong> больше места для формы. Редкие действия можно убрать в «Ещё».</p>
+        </article>
+      </div>
+    </section>
+  </div>
+  <div class="screen-label" id="screenLabel">01 · Мастерская — спокойный зелёный акцент</div>
+  <script>
+    const app = document.getElementById('app');
+    const label = document.getElementById('screenLabel');
+    const variants = {
+      forest: ['theme-forest', '01 · Мастерская — спокойный зелёный акцент'],
+      graphite: ['theme-graphite', '02 · Техно — синий акцент и графитовая навигация'],
+      copper: ['theme-copper', '03 · Крафт — тёплая бумага и медный акцент'],
+      classic: ['theme-classic', '04 · Классика — светло-голубой, знакомый рабочий стиль'],
+      dark: ['theme-dark', '05 · Тёмная — графитовые поверхности и мятный акцент'],
+      contrast: ['theme-contrast', '06 · Контраст — выразительная типографика и ясные границы'],
+      emblem: ['theme-emblem', '07 · Эмблема — яркий синий, жёлтый и графит из значка мастера'],
+      pink: ['theme-pink', '08 · Розовая — приглушённая роза, пудровые поверхности и бордовая навигация'],
+      purple: ['theme-purple', '09 · Фиолетовая — лавандовые поверхности, фиолетовые кнопки и тёмная сливовая навигация']
+    };
+    document.querySelectorAll('.switcher button').forEach(button => button.addEventListener('click', () => {
+      const [theme, description] = variants[button.dataset.theme];
+      app.className = `app ${theme}`;
+      label.textContent = description;
+      document.querySelectorAll('.switcher button').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+    }));
+  </script>
+</body>
+</html>

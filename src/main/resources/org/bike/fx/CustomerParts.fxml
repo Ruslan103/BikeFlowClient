@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?><?import javafx.scene.layout.*?>
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.bike.fx.workorder.CustomerPartsPanel" fx:id="root" spacing="8" maxHeight="Infinity">
+<TableView editable="true" fx:id="table" prefHeight="150" minHeight="100" maxHeight="Infinity" VBox.vgrow="ALWAYS"><columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN"/></columnResizePolicy><columns><TableColumn text="Предмет ремонта" prefWidth="220"/><TableColumn text="Кол-во" prefWidth="70"/><TableColumn text="Состояние при приёме" prefWidth="260"/></columns></TableView>
+</VBox>
+

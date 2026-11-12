@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?><?import javafx.scene.layout.*?><?import javafx.geometry.Insets?>
+<DialogPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.bike.fx.workorder.CustomerPartEditorController" prefWidth="560" stylesheets="@theme.css">
+<content><VBox spacing="10"><padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+<Label text="Название детали"/><TextField fx:id="name" promptText="Колесо, вилка, амортизатор…"/>
+<HBox spacing="12"><VBox spacing="4" HBox.hgrow="ALWAYS"><Label text="Марка"/><TextField fx:id="brand"/></VBox><VBox spacing="4" HBox.hgrow="ALWAYS"><Label text="Модель"/><TextField fx:id="model"/></VBox></HBox>
+<HBox spacing="12"><VBox spacing="4" HBox.hgrow="ALWAYS"><Label text="Количество"/><TextField fx:id="quantity" text="1"/></VBox><VBox spacing="4" HBox.hgrow="ALWAYS"><Label text="Серийный номер"/><TextField fx:id="serialNumber"/></VBox></HBox>
+<Label text="Состояние при приёме"/><TextArea fx:id="conditionOnReceipt" prefRowCount="2" wrapText="true"/>
+<Label text="Комплектность"/><TextArea fx:id="includedAccessories" prefRowCount="2" wrapText="true"/>
+<Label text="Что требуется сделать"/><TextArea fx:id="reportedIssue" prefRowCount="2" wrapText="true"/>
+<Label fx:id="validation" wrapText="true" styleClass="status"/>
+</VBox></content><buttonTypes><ButtonType text="Сохранить" buttonData="OK_DONE"/><ButtonType text="Отмена" buttonData="CANCEL_CLOSE"/></buttonTypes></DialogPane>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox fx:id="root" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.bike.fx.workorder.ProductsPanel" spacing="10" minWidth="0" maxHeight="Infinity" prefWidth="500" styleClass="card">
+  <Label text="Товары" styleClass="heading" />
+  <ComboBox fx:id="choices" maxWidth="Infinity" editable="true" promptText="Выберите товар и нажмите Enter"/>
+  <TableView editable="true" fx:id="table" prefHeight="150" minHeight="80" maxHeight="Infinity" minWidth="0" VBox.vgrow="ALWAYS">
+    <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN"/></columnResizePolicy>
+    <columns><TableColumn text="Товар" prefWidth="160"/><TableColumn text="Кол-во" prefWidth="65"/><TableColumn text="Стоимость" prefWidth="90"/><TableColumn text="Скидка" prefWidth="85"/><TableColumn text="Итого" prefWidth="85"/><TableColumn text="Обеспечение" prefWidth="125"/></columns>
+  </TableView>
+  <Label fx:id="total" text="Всего товаров: 0     Стоимость: 0     Со скидкой: 0" styleClass="heading" wrapText="true"/>
+</VBox>
+
+

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<BorderPane stylesheets="@theme.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.bike.fx.shell.ShellController" fx:id="root" prefWidth="1440" prefHeight="960">
+  <top>
+    <HBox spacing="12" alignment="CENTER_LEFT" styleClass="topbar">
+      <Label text="BikeFlow" wrapText="true" styleClass="heading" />
+      <Region HBox.hgrow="ALWAYS" />
+      <Label fx:id="connectionLabel" styleClass="muted" />
+      <ComboBox fx:id="profile" prefWidth="260" onShowing="#reloadProfiles" />
+      <Button text="Войти / переподключить" onAction="#login">
+      </Button>
+    </HBox>
+  </top>
+  <center>
+    <StackPane fx:id="content" />
+  </center>
+  <bottom>
+    <VBox>
+      <HBox fx:id="navigation" spacing="4" styleClass="navigation">
+        <Button text="Бланк" onAction="#workOrder">
+          <graphic>
+            <SVGPath content="M 3 1 H 10 L 14 5 V 15 H 2 V 1 Z M 10 1 V 5 H 14 M 5 8 H 11 M 5 11 H 11" fill="TRANSPARENT" stroke="#606060" strokeWidth="1.4" />
+          </graphic>
+        </Button>
+        <Button text="Клиенты" onAction="#clients">
+          <graphic>
+            <SVGPath content="M 8 8 A 3 3 0 1 0 8 2 A 3 3 0 1 0 8 8 M 2 15 C 2 12 4.5 10 8 10 C 11.5 10 14 12 14 15" fill="TRANSPARENT" stroke="#606060" strokeWidth="1.4" />
+          </graphic>
+        </Button>
+        <Button text="Услуги и цены" onAction="#catalog">
+          <graphic>
+            <SVGPath content="M 2 12 L 12 2 M 9 2 A 4 4 0 0 0 14 7 L 12 9 L 7 4 Z M 2 12 L 5 15 L 8 12 L 5 9 Z" fill="TRANSPARENT" stroke="#606060" strokeWidth="1.4" />
+          </graphic>
+        </Button>
+        <Button text="Скидки" onAction="#discounts">
+          <graphic>
+            <SVGPath content="M 3 13 L 13 3 M 4.5 6 A 1.5 1.5 0 1 0 4.5 3 A 1.5 1.5 0 1 0 4.5 6 M 11.5 14 A 1.5 1.5 0 1 0 11.5 11 A 1.5 1.5 0 1 0 11.5 14" fill="TRANSPARENT" stroke="#606060" strokeWidth="1.4" />
+          </graphic>
+        </Button>
+        <Button text="Профили" onAction="#profiles">
+          <graphic>
+            <SVGPath content="M 6 8 A 2.5 2.5 0 1 0 6 3 A 2.5 2.5 0 1 0 6 8 M 1.5 15 C 1.5 12.5 3.5 10.5 6 10.5 C 8.5 10.5 10.5 12.5 10.5 15 M 11 4 H 15 M 13 2 V 6" fill="TRANSPARENT" stroke="#606060" strokeWidth="1.4" />
+          </graphic>
+        </Button>
+        <Button text="Настройки" onAction="#settings">
+          <graphic>
+            <SVGPath content="M 8 2 L 9 3 L 11 3 L 12 2 L 14 4 L 13 5 L 13 7 L 15 8 L 14 10 L 12 10 L 11 12 L 11 14 L 8 15 L 7 13 L 5 13 L 4 14 L 2 12 L 3 10 L 3 8 L 1 7 L 2 5 L 4 5 L 5 3 L 5 1 Z M 8 10 A 2 2 0 1 0 8 6 A 2 2 0 1 0 8 10" fill="TRANSPARENT" stroke="#606060" strokeWidth="1.2" />
+          </graphic>
+        </Button>
+      </HBox>
+      <HBox alignment="CENTER_RIGHT" styleClass="navigation-strip">
+        <Button text="⌃" onAction="#toggleNavigation">
+        </Button>
+      </HBox>
+    </VBox>
+  </bottom>
+</BorderPane>
