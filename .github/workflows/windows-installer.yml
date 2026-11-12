@@ -41,7 +41,7 @@ jobs:
       - name: Prepare release file
         shell: pwsh
         run: |
-          $installer = Get-ChildItem -LiteralPath 'target' -Filter 'CraftBiker-1.0.exe' -File -Recurse |
+          $installer = Get-ChildItem -LiteralPath 'target' -Filter 'CraftBiker-1.0.1.exe' -File -Recurse |
             Sort-Object LastWriteTime -Descending |
             Select-Object -First 1
           if (-not $installer) { throw 'The EXE installer was not created.' }

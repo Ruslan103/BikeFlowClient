@@ -145,8 +145,8 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 Чтобы создать релиз с установщиком в **Releases**, отправьте тег версии из папки проекта:
 
 ~~~powershell
-git tag v1.0.0
-git push origin v1.0.0
+git tag v1.0.1
+git push origin v1.0.1
 ~~~
 
 GitHub Actions соберёт Windows-установщик с Java runtime и опубликует его в созданном релизе. Установка выполняется для текущего пользователя; установщик добавляет ярлык в меню «Пуск» и на рабочий стол. Для сборки используются Windows runner, JDK 21 и WiX Toolset.

@@ -1,4 +1,4 @@
-param([switch]$Installer)
+param([switch]$Installer, [string]$AppVersion = '1.0.1')
 
 $ErrorActionPreference = 'Stop'
 $projectDirectory = Split-Path -Parent $PSScriptRoot
@@ -61,7 +61,7 @@ try {
         '--add-modules' 'java.se,javafx.controls,javafx.fxml,jdk.crypto.ec,jdk.unsupported' `
         '--java-options' '--add-modules=javafx.controls,javafx.fxml' `
         '--icon' (Join-Path $projectDirectory 'tools/assets/craft-biker-app-icon.ico') `
-        '--app-version' '1.0' '--vendor' 'Craft Bike' @installerOptions
+        '--app-version' $AppVersion '--vendor' 'Craft Bike' @installerOptions
     if ($LASTEXITCODE -ne 0) { throw 'Не удалось создать приложение с Java runtime.' }
     if ($Installer) {
         $installerFile = Get-ChildItem -LiteralPath $outputDirectory -Filter '*.exe' -File |
